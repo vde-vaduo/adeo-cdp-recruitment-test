@@ -1,0 +1,20 @@
+{
+  "name": "adeo-cdp-recruitment-test",
+  "version": "1.0.0",
+  "description": "Valentin Delplanque trying to get recruited by Adeo by coding their exercise",
+  "main": "app.js",
+  "scripts": {
+    "count": "node app.js --count",
+    "test": "npm run tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vde-vaduo/adeo-cdp-recruitment-test.git"
+  },
+  "author": "Valentin Delplanque",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vde-vaduo/adeo-cdp-recruitment-test/issues"
+  },
+  "homepage": "https://github.com/vde-vaduo/adeo-cdp-recruitment-test#readme"
+}
