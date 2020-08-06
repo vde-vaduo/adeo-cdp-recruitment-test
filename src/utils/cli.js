@@ -3,6 +3,19 @@
 const ErrorUtils = require('./error.js');
 
 /**
+ * Prettify the data and display it in the console
+ * @param data
+ */
+function displayData(data) {
+    // Prettify the JSON in order to output it in the console
+    const prettyJson = JSON.stringify(data, null, 3);
+
+    // Display it in the console
+    console.log(prettyJson);
+    process.exit(0);
+}
+
+/**
  * Throws an error when the usage of the script is wrong (e.g. by providing no argument, or too much)
  */
 function throwWrongUsageError() {
@@ -45,4 +58,5 @@ module.exports = {
     throwWrongUsageError,
     getArgument,
     getFilter,
+    displayData,
 };
