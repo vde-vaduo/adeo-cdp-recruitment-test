@@ -1,11 +1,12 @@
 // This Utils file provides functions to help getting and checking the multiple arguments that might be passed to the node.js script
 
+const ErrorUtils = require('./error.js');
+
 /**
  * Throws an error when the usage of the script is wrong (e.g. by providing no argument, or too much)
  */
 function throwWrongUsageError() {
-    console.error('Wrong usage of this script. Check README.md to get how to use it');
-    process.exit(1);
+    ErrorUtils.throwError('Wrong usage of this script. Check README.md to get how to use it');
 }
 
 /**
@@ -44,4 +45,4 @@ module.exports = {
     throwWrongUsageError,
     getArgument,
     getFilter,
-}
+};
