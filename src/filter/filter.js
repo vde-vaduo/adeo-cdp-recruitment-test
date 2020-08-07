@@ -11,13 +11,16 @@ const Counter = require('../count/count.js');
  * @returns {*}: the filtered array of countries
  */
 function filterCountries(countries, filterText, count) {
+    // Deep copy so that the original array is not affected by the filtering
+    const countriesCopy = JSON.parse(JSON.stringify(countries));
+
     // Filter countries
-    const filteredCountries = countries.filter(country => {
+    const filteredCountries = countriesCopy.filter(country => {
         // Filter people
         const filteredPeople = country.people.filter(person => {
             // Filter animals by checking their name contains the filter text
             // I stated that the filtering part should be case sensitive (it's about names, not words).
-            const filteredAnimals = person.animals.filter(animal => animal.name.indexOf(filterText) > 0);
+            const filteredAnimals = person.animals.filter(animal => animal.name.indexOf(filterText) > -1);
 
             // We return only the filtered animals
             person.animals = filteredAnimals;
@@ -41,7 +44,7 @@ function filterCountries(countries, filterText, count) {
 
     // Check the filter returned something
     if (filteredCountries.length === 0) {
-        ErrorUtils.throwError('[NOT_FOUND] 404: no puppy found with this name :\'(')
+        ErrorUtils.throwError('[NOT_FOUND] 404: no puppy found with this name :\'(');
     }
 
     return filteredCountries;
