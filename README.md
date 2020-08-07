@@ -25,6 +25,10 @@ $ node app.js --count
 ```
 
 ## Test
+You must firstly install all dependencies
+```bash
+$ npm install
+```
 Run all the unit tests
 ```bash
 $ npm run test
