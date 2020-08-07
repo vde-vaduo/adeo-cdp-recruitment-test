@@ -2,6 +2,18 @@
 
 const ErrorUtils = require('./error.js');
 
+// List of command lines options, with 'hasValue' option (meaning it must be like --filter=foo if true)
+const cliOptions = [
+    {
+        name: '--filter',
+        hasValue: true,
+    },
+    {
+        name: '--count',
+        hasValue: false,
+    },
+]
+
 /**
  * Prettify the data and display it in the console
  * @param data
@@ -23,20 +35,33 @@ function throwWrongUsageError() {
 }
 
 /**
- * Checks there is one and only one command line argument and returns it (e.g. --filter)
- * @returns {string}: the command line argument
+ * Check the command line arguments and return them
+ * @returns {string[]}: the command line arguments
  */
-function getArgument() {
+function parseCliArguments() {
     // Read node cli args
     const cliArgs = process.argv.slice(2);
 
-    // Handle empty args
-    if (cliArgs.length !== 1) { // Zero or multiple argument(s)
+    // Check arguments are valid
+    if (cliArgs.length === 0 || !cliArgs.every(arg => {
+        // For every argument passed in the cli, it must match with at least one of the allowed options defined in cliOptions
+        return cliOptions.some(allowedArg => {
+            let argName;
+            if (allowedArg.hasValue) {
+                // Must be formatted like --argument=value
+                argName = arg.split('=')[0]
+            } else {
+                argName = arg;
+            }
+
+            return argName != null && argName === allowedArg.name;
+        });
+    })) {
         throwWrongUsageError();
     }
 
-    // Return the first and only argument we handle in this script
-    return cliArgs[0];
+    // Return the arguments
+    return cliArgs;
 }
 
 /**
@@ -55,8 +80,7 @@ function getFilter(cliArgument) {
 }
 
 module.exports = {
-    throwWrongUsageError,
-    getArgument,
+    parseCliArguments,
     getFilter,
     displayData,
 };
