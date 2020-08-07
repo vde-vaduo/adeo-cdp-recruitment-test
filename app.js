@@ -5,27 +5,38 @@
     So have a coffee, relax, and enjoy your trip on what has come to my mind when solving your exercise ;)
 
     Please note that I forced myself to stay focused on the exercise scope to not overcomplicate things
-        For example I didn't manage multiple CLI argument (we could imagine $ node app.js --filter=foo --count and do both, but it's not required)
-        I also adapted my code to the data provided by taking in account that there is not a lot of it,
+        For example I adapted my code to the data provided by taking in account that there is not a lot of it,
             my code would be very different if we were working with a huge amount of data.
  */
 
 const CliUtils = require('./src/utils/cli.js');
+const DataUtils = require('./src/utils/data.js');
 const DataFilter = require('./src/filter/filter.js');
+const DataCounter = require('./src/count/count.js');
 
-// Get CLI argument // sad we cannot use a npm module :'(
-const cliArg = CliUtils.getArgument()
+// Get CLI arguments // sad we cannot use a npm module :'(
+const cliArgs = CliUtils.parseCliArguments();
 
-// Check arg to determine which function to call
-if (cliArg.indexOf('--filter') > -1 && cliArg.indexOf('=') > -1) {
-    // Get and check the filtering string
-    const filterText = CliUtils.getFilter(cliArg);
+// Read data from file
+let countries = DataUtils.getCountries();
 
-    // Let's filter !
-    DataFilter.filter(filterText);
-} else if (cliArg === '--count') {
-    // Let's count !
-    console.log('Go count !');
-} else {
-    CliUtils.throwWrongUsageError();
+// Check if the filter argument is given
+const filterArg = cliArgs.filter(arg => arg.indexOf('--filter') > -1)[0];
+
+// Check if the count argument is given
+const countArg = cliArgs.indexOf('--count') > -1;
+
+// Should we filter ?
+if (filterArg != null) {
+    // Get and check the filtering text
+    const filterText = CliUtils.getFilter(filterArg);
+
+    // Filter the array of countries and eventually count (you don't want to do it separately, performances!)
+    countries = DataFilter.filterCountries(countries, filterText, countArg);
+} else if (cliArgs.indexOf('--count') > -1) { // Only count
+    // Count everything
+    countries = DataCounter.countCountries(countries);
 }
+
+// Display the countries in the console
+CliUtils.displayData(countries);
