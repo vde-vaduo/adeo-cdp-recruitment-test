@@ -13,10 +13,10 @@ function getCountries() {
     // Check the data is correct and not empty
     if (countries == null || countries.data == null || countries.data.length === 0) {
         ErrorUtils.throwError('No data provided or the data format has changed, fix it and try again.');
+    } else {
+        // return the countries
+        return countries.data;
     }
-
-    // return the countries
-    return countries.data;
 }
 
 module.exports = {

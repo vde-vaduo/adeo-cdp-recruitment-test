@@ -27,5 +27,9 @@ $ node app.js --count
 ## Test
 Run all the unit tests
 ```bash
-$ npm test
+$ npm run test
+```
+Test coverage
+```bash
+$ npm run coverage
 ```
