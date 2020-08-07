@@ -83,4 +83,5 @@ module.exports = {
     parseCliArguments,
     getFilter,
     displayData,
+    throwWrongUsageError,
 };
