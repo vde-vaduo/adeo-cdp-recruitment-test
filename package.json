@@ -1,0 +1,24 @@
+{
+  "name": "adeo-cdp-recruitment-test",
+  "version": "1.0.0",
+  "description": "Valentin Delplanque trying to get recruited by Adeo by coding their exercise",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vde-vaduo/adeo-cdp-recruitment-test.git"
+  },
+  "author": "Valentin Delplanque",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vde-vaduo/adeo-cdp-recruitment-test/issues"
+  },
+  "homepage": "https://github.com/vde-vaduo/adeo-cdp-recruitment-test#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-spies": "^1.0.0",
+    "mocha": "^8.1.1"
+  }
+}
